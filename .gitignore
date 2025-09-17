@@ -24,6 +24,12 @@ go.work.sum
 *.swp
 *.swo
 
+#AI THINGS
+.bmad-core/
+.qwen/
+.github/chatmodes
+.roomodes
+
 # OS specific files
 .DS_Store
 .DS_Store?
