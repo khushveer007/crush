@@ -86,7 +86,7 @@ func (o *openaiClient) isAzureOpenAI() bool {
 	hostname := strings.ToLower(parsedURL.Hostname())
 
 	// Check for Azure OpenAI patterns
-	return strings.Contains(hostname, ".openai.azure.com") || strings.HasSuffix(hostname, ".openai.azure.com")
+	return strings.HasSuffix(hostname, ".openai.azure.com") || strings.HasSuffix(hostname, ".cognitiveservices.azure.com")
 }
 
 func (o *openaiClient) convertMessages(messages []message.Message) (openaiMessages []openai.ChatCompletionMessageParamUnion) {
@@ -265,6 +265,11 @@ func (o *openaiClient) preparedParams(messages []openai.ChatCompletionMessagePar
 	// Override max tokens if set in provider options
 	if o.providerOptions.maxTokens > 0 {
 		maxTokens = o.providerOptions.maxTokens
+	}
+
+	// Ensure maxTokens is not zero, providing a default if necessary
+	if maxTokens == 0 {
+		maxTokens = 1024 // Default to 1024 if no value is configured
 	}
 
 	// Provider-aware parameter logic

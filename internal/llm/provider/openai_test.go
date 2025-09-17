@@ -125,6 +125,11 @@ func TestIsAzureOpenAI(t *testing.T) {
 			baseURL:  "https://TEST.OPENAI.AZURE.COM/api",
 			expected: true,
 		},
+		{
+			name:     "Azure Cognitive Services URL",
+			baseURL:  "https://my-custom-name.cognitiveservices.azure.com/",
+			expected: true,
+		},
 	}
 
 	for _, tt := range tests {
@@ -161,6 +166,13 @@ func TestPreparedParamsProviderAware(t *testing.T) {
 			name:                      "Azure OpenAI with reasoning model",
 			baseURL:                   "https://test.openai.azure.com",
 			modelCanReason:            true,
+			expectMaxTokens:           false,
+			expectMaxCompletionTokens: true,
+		},
+		{
+			name:                      "Azure Cognitive Services with non-reasoning model",
+			baseURL:                   "https://my-custom-name.cognitiveservices.azure.com/",
+			modelCanReason:            false,
 			expectMaxTokens:           false,
 			expectMaxCompletionTokens: true,
 		},
