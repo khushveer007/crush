@@ -29,7 +29,7 @@ go.work.sum
 .qwen/
 .github/chatmodes
 .roomodes
-docs/
+docs
 
 # OS specific files
 .DS_Store
